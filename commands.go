@@ -82,6 +82,10 @@ const (
 	// the current channel.
 	TVCurrentChannelProgramCommand Command = "ssap://tv/getChannelProgramInfo"
 
+	TVSwitchInput Command = "ssap://tv/switchInput"
+
+	TVGetExternalInputList Command = "ssap://tv/getExternalInputList"
+
 	GetPointerInputSocketCommand Command = "ssap://com.webos.service.networkinput/getPointerInputSocket"
 
 	KeyEnterCommand Command = "ssap://com.webos.service.ime/sendEnterKey"
@@ -244,7 +248,8 @@ func (tv *TV) ChannelDown() error {
 }
 
 // ChannelList returns information about available channels.
-//  @todo implement a ChannelList type. This doesn't work on my TV.
+//
+//	@todo implement a ChannelList type. This doesn't work on my TV.
 func (tv *TV) ChannelList() (Message, error) {
 	return tv.Command(TVChannelListCommand, nil)
 }
@@ -256,16 +261,34 @@ func (tv *TV) ChannelUp() error {
 }
 
 // CurrentChannel returns information about the current channel.
-//  @todo implement a Channel type. This doesn't work on my TV.
+//
+//	@todo implement a Channel type. This doesn't work on my TV.
 func (tv *TV) CurrentChannel() (Message, error) {
 	return tv.Command(TVCurrentChannelCommand, nil)
 }
 
 // CurrentProgram returns information about the current program
 // shown on the CurrentChannel.
-//  @todo implement a Program type. This doesn't work on my TV.
+//
+//	@todo implement a Program type. This doesn't work on my TV.
 func (tv *TV) CurrentProgram() (Message, error) {
 	return tv.Command(TVCurrentChannelProgramCommand, nil)
+}
+
+// SwitchInput returns information about the current program
+// shown on the CurrentChannel.
+//
+//	@todo implement a Program type. This doesn't work on my TV.
+func (tv *TV) SwitchInput(inputId string) (Message, error) {
+	return tv.Command(TVSwitchInput, Payload{"inputId": inputId})
+}
+
+// CurrentProgram returns information about the current program
+// shown on the CurrentChannel.
+//
+//	@todo implement a Program type. This doesn't work on my TV.
+func (tv *TV) GetInputs() (Message, error) {
+	return tv.Command(TVGetExternalInputList, nil)
 }
 
 func (tv *TV) KeyUp() error {

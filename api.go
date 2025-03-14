@@ -1,7 +1,8 @@
 package webos
 
 import (
-	"github.com/pkg/errors"
+	"errors"
+	"fmt"
 )
 
 // MessageType is the type sent to and returned by the TV in the `type` field.
@@ -48,7 +49,7 @@ func (m Message) Validate() error {
 			return errors.New(m.Error)
 		}
 
-		return errors.Errorf("API error: %s, %s", m.Error, err)
+		return fmt.Errorf("API error: %s, %s", m.Error, err)
 	case ResponseMessageType:
 		return m.Payload.Validate()
 	case RegisteredMessageType:
@@ -57,7 +58,7 @@ func (m Message) Validate() error {
 		}
 		return nil
 	default:
-		return errors.Errorf("unexpected API response type: %s", m.Type)
+		return fmt.Errorf("unexpected API response type: %s", m.Type)
 	}
 }
 
@@ -82,7 +83,7 @@ func (p Payload) Validate() error {
 
 	if !returnValue {
 		if p["errorCode"] != nil {
-			return errors.Errorf("error %v: %v", p["errorCode"], p["errorText"])
+			return fmt.Errorf("error %v: %v", p["errorCode"], p["errorText"])
 		}
 
 		return errors.New("`returnValue` is false and `errorCode` is nil")

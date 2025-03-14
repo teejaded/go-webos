@@ -8,7 +8,7 @@ import (
 
 	"github.com/gorilla/websocket"
 
-	webos "github.com/kaperys/go-webos"
+	webos "github.com/teejaded/go-webos"
 )
 
 func main() {
@@ -22,7 +22,7 @@ func main() {
 		}).Dial,
 	}
 
-	tv, err := webos.NewTV(&dialer, "192.168.1.67")
+	tv, err := webos.NewTV(&dialer, "192.168.4.82")
 	if err != nil {
 		log.Fatalf("could not dial: %v", err)
 	}
@@ -30,9 +30,11 @@ func main() {
 
 	go tv.MessageHandler()
 
-	if err = tv.AuthoriseClientKey("6c7b2ec679ffd1c2736abd621153eabb"); err != nil {
+	if err = tv.AuthoriseClientKey("*****"); err != nil {
 		log.Fatalf("could not authoise using client key: %v", err)
 	}
 
-	tv.LaunchApp("netflix")
+	// tv.LaunchApp("netflix")
+	msg, err := tv.CurrentChannel()
+	log.Printf("%v | %v", msg, err)
 }

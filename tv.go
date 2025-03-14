@@ -6,9 +6,9 @@ import (
 	"math/rand"
 	"sync"
 	"time"
+	"errors"
 
 	"github.com/gorilla/websocket"
-	"github.com/pkg/errors"
 )
 
 var (

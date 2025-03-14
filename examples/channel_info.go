@@ -9,7 +9,7 @@ import (
 
 	"github.com/gorilla/websocket"
 
-	webos "github.com/kaperys/go-webos"
+	webos "github.com/teejaded/go-webos"
 )
 
 func main() {

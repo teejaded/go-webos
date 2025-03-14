@@ -1,7 +1,10 @@
-module github.com/kaperys/go-webos
+module github.com/teejaded/go-webos
+
+go 1.23.4
 
 require (
-	github.com/gorilla/websocket v1.2.0
-	github.com/mitchellh/mapstructure v0.0.0-20180715050151-f15292f7a699
-	github.com/pkg/errors v0.8.0
+	github.com/gorilla/websocket v1.5.3
+	github.com/mitchellh/mapstructure v1.5.0
 )
+
+require github.com/ghthor/gowol v0.0.0-20230113203606-e48fda6cc907 // indirect
